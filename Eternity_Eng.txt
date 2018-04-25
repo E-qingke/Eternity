@@ -1,0 +1,8 @@
+servlet 控制器
+jsp：java server page(记录)
+search 查询、搜索
+remove 移开、删除
+omport 重要
+location 位置
+custom 习惯性
+setting 安装、环境、布置
