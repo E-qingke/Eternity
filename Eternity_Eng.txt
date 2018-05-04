@@ -8,3 +8,4 @@ custom 习惯性
 setting 安装、环境、布置
 select 挑选；选拔
 distinct  adj.明显的；独特的
+money 钱1
