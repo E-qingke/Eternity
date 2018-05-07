@@ -7,5 +7,6 @@ location 位置
 custom 习惯性
 setting 安装、环境、布置
 select 挑选；选拔
-distinct  adj.明显的；独特的
-money 钱1
+distinct  adj.明显的；独特的，有区别的
+drop vt.使降低 使终止
+index n.指标 vi.做索引
