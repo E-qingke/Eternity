@@ -1,0 +1,137 @@
+总结：
+1\创建数据库
+create database database_name
+2\删除数据库
+drop database database_name
+3\备份sql server
+--- 创建 备份数据的 device
+USE master
+EXEC sp_addumpdevice 'disk', 'testBack','c:\mssql7backup\MyNwind_1.dat'
+-- 开始 备份
+BACKUP DATABASE pubs TO testBack
+4\创新新表
+create table tabname(col1\属性\ type1 [not null] [primarykey],col2 type2 [not null],..)
+A：create table tab_new like tab_old (使用旧表创建新表)
+B：create table tab_new as select col1,col2… from tab_old definition only
+5：删除新表
+drop table tabname 
+6、增加一个列
+Alter table tabname add column 属性名 type
+注：列增加后将不能删除。DB2中列加上后数据类型也不能改变，唯一能改变的是增加varchar类型的长度。
+7、添加主键： Alter table tabname add primarykey(col) 
+说明：删除主键： Alter table tabname dropprimary key(col) 
+8、创建索引：create [unique] index idxname ontabname(col….) 
+删除索引：drop index idxname
+注：索引是不可更改的，想更改必须删除重新建。
+9、创建视图：create view viewname as selectstatement 
+删除视图：drop view viewname
+
+
+
+
+
+
+
+
+一、建立数据库：
+create database 订货管理
+on
+primary
+(name = orderman_dat,
+filename = 'E:\数据库学习\order.mdf',
+size = 10,
+maxsize = 50,
+filegrowth = 5),
+filegroup 仓库
+(name = warehouse,
+filename = 'E:\数据库学习\wh.ndf',
+size = 10,
+maxsize = 50,
+filegrowth = 5)
+log on
+(name = orderman_log,
+filename = 'E:\数据库学习\order.ldf',
+size = 5mb,
+maxsize = 25mb,
+filegrowth = 5mb)
+
+二、建立表:
+/*建立仓库表*/
+create table 仓库(
+仓库号 char(5) primary key,
+城市 char(10),
+面积 int check(面积>0))
+
+/*建立职工表*/
+create table 职工(
+仓库号 char(5) foreign key references 仓库,
+职工号 char(5) primary key,
+工资 int check(工资>=1000 and 工资 <=5000)default 1200)
+
+/*建立供应商表*/
+create table 供应商(
+供应商号 char(5) primary key,
+供应商名 char(20),
+地址 char(20))
+
+/*建立订购单表*/
+create table 订购单(
+职工号 char(5) not null foreign key references 职工,
+供应商号 char(5) null foreign key references 供应商,
+订购单号 char(5) primary key,
+订购日期 datetime default getdate())
+/*自取时间日期，不需要给定值*/
+
+/*删除完整性约束---建立的列级或表级完整性约束可以删除，
+但是前提是在定义完整性约束时必须给出约束名称，
+否则不能删除*/
+
+/*添加属性*/
+alter table 表名 add 属性名 数据类型 约束条件
+/*修改属性*/
+alter table 表名
+alter column 属性名 修改的数据类型
+/*删除属性*/
+alter table 订购单 drop column 完成日期
+
+/*删除表*/
+create table Delete1(
+人生 char(5),
+)
+drop table Delete1
+
+/*索引*/
+/普通索引/create index sup_idx on 订购单(供应商号)
+create index sup_emp_idx on 订购单(供应商号,职工号 desc)
+/唯一索引/reate unique index city_idx on 仓库(城市)
+
+/*输入属性值*/
+insert into dbo.仓库 values
+('00001','上海',120),
+('00002','合肥',210),
+('00003','深圳',200),
+('00004','北京',220)
+
+insert into dbo.供应商 values
+('10001','人大','北京'),
+('10002','清华','北京'),
+('10003','北大','北京')
+
+insert into dbo.职工 values
+('00001','20001',1500),
+('00001','20002',1600),
+('00002','20021',1400),
+('00002','20022',1500),
+('00002','20023',1600),
+('00003','20032',1500),
+('00004','20033',1500)
+
+insert into dbo.订购单 values
+('20001','10001','30011',''),
+('20001','10002','30012',''),
+('20002','10001','30021',''),
+('20021','10002','30032',''),
+('20022','10003','30033',''),
+('20023','10003','30233',''),
+('20032','10002','30322',''),
+('20033','10003','30333','')
