@@ -10,3 +10,7 @@ select 挑选；选拔
 distinct  adj.明显的；独特的，有区别的
 drop vt.使降低 使终止
 index n.指标 vi.做索引
+database n.数据库
+exists n.存在量词 v.存在，出现
+compute vt.计算；估算
+
