@@ -13,4 +13,6 @@ index n.指标 vi.做索引
 database n.数据库
 exists n.存在量词 v.存在，出现
 compute vt.计算；估算
-
+ connection 联系，关联，链接
+statement n.声明
+resultset 结果集
